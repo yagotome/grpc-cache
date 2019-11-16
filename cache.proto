@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package cachepb;
+
+// Item is what is stored in the cache
+message Item {
+    string key = 1;
+    string value = 2;
+}
+
+service CacheService {
+    rpc Get (GetArgs) returns (Item);
+}
+
+message GetArgs {
+    string key = 1;
+}
