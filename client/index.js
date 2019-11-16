@@ -22,4 +22,10 @@ const storeItem = promisify(client.Store.bind(client));
     const { value: champion } = await getItem({ key: 'champion' });
     console.log('returned color:', color);
     console.log('returned champion:', champion);
+
+    try {
+        await getItem({ key: 'missingKey' });
+    } catch (err) {
+        console.error(err);
+    }
 })();
