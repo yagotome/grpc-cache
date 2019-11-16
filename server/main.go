@@ -15,8 +15,8 @@ type service struct {
 	store map[string]string
 }
 
-func (s service) Get(ctx context.Context, req *cachepb.GetArgs) (*cachepb.Item, error) {
-	key := req.GetKey()
+func (s service) Get(ctx context.Context, args *cachepb.GetArgs) (*cachepb.Item, error) {
+	key := args.GetKey()
 	value, exists := s.store[key]
 	if !exists {
 		return nil, status.Errorf(codes.NotFound, "'%s' not found", key)
@@ -25,6 +25,11 @@ func (s service) Get(ctx context.Context, req *cachepb.GetArgs) (*cachepb.Item, 
 		Key:   key,
 		Value: value,
 	}, nil
+}
+
+func (s service) Store(ctx context.Context, item *cachepb.Item) (*cachepb.Item, error) {
+	s.store[item.GetKey()] = item.GetValue()
+	return item, nil
 }
 
 func newCacheService() *service {

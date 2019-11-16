@@ -10,6 +10,7 @@ message Item {
 
 service CacheService {
     rpc Get (GetArgs) returns (Item);
+    rpc Store (Item) returns (Item);
 }
 
 message GetArgs {
