@@ -5,6 +5,9 @@
   "main": "index.js",
   "author": "Yago Tomé",
   "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
   "dependencies": {
     "@grpc/proto-loader": "^0.5.3",
     "grpc": "^1.24.2"
