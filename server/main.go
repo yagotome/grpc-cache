@@ -16,7 +16,7 @@ type service struct {
 }
 
 func (s service) Get(ctx context.Context, args *cachepb.GetArgs) (*cachepb.Item, error) {
-	key := args.GetKey()
+	key := args.Key
 	value, exists := s.store[key]
 	if !exists {
 		return nil, status.Errorf(codes.NotFound, "'%s' not found", key)
@@ -28,7 +28,7 @@ func (s service) Get(ctx context.Context, args *cachepb.GetArgs) (*cachepb.Item,
 }
 
 func (s service) Store(ctx context.Context, item *cachepb.Item) (*cachepb.Item, error) {
-	s.store[item.GetKey()] = item.GetValue()
+	s.store[item.Key] = item.Value
 	return item, nil
 }
 
